@@ -26,14 +26,8 @@ function part1() {
   console.log(count);
 }
 
-// 99 -> 101
-// -1 -> 1
-// 0 -> 100
-// 0 -> 200
-// 0 -> -5
-
 export function getHundredsPlace(num: number) {
-  const digit = Math.floor(Math.abs(num) / 100) % 10;
+  const digit = Math.floor(Math.abs(num) / 100);
   return digit === 0 ? 0 : digit * Math.sign(num);
 }
 
@@ -59,8 +53,8 @@ export function getModulo(num: number) {
 }
 
 function part2() {
-  // const fileName = 'input.txt';
-  const fileName = 'test.txt';
+  const fileName = 'input.txt';
+  // const fileName = 'test.txt';
   const filePath = path.join(import.meta.dirname, fileName);
 
   const file = fs.readFileSync(filePath, 'utf8');
@@ -79,15 +73,13 @@ function part2() {
     count += getZeroCross(num, numAfter);
 
     num = getModulo(numAfter);
-
-    console.log('num', num);
   }
 
   console.log(count);
 }
 
 function main() {
-  //   part1();
+  part1();
   part2();
 }
 
