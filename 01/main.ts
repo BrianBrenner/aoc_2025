@@ -38,21 +38,29 @@ export function getHundredsPlace(num: number) {
 }
 
 export function getZeroCross(numBefore: number, numAfter: number) {
-  if (numBefore >= 100 || numBefore <= -100) {
-    throw new Error('numBefore is out of range');
+  if (numBefore >= 100 || numBefore < 0) {
+    throw new Error(`numBefore is out of range: ${numBefore}`);
   }
 
   let count = Math.abs(getHundredsPlace(numAfter) - getHundredsPlace(numBefore));
-  if (Math.sign(numAfter) !== Math.sign(numBefore) && numBefore % 100 !== 0) {
+
+  if (Math.sign(numBefore) !== Math.sign(numAfter) && numBefore !== 0) {
     count += 1;
   }
 
   return count;
 }
 
+export function getModulo(num: number) {
+  if (num >= 0) {
+    return num % 100;
+  }
+  return ((num % 100) + 100) % 100;
+}
+
 function part2() {
-  const fileName = 'input.txt';
-  // const fileName = 'test.txt';
+  // const fileName = 'input.txt';
+  const fileName = 'test.txt';
   const filePath = path.join(import.meta.dirname, fileName);
 
   const file = fs.readFileSync(filePath, 'utf8');
@@ -70,11 +78,9 @@ function part2() {
 
     count += getZeroCross(num, numAfter);
 
-    console.log('num', num);
-    console.log('numAfter', numAfter);
-    console.log('count', count);
+    num = getModulo(numAfter);
 
-    num = numAfter % 100;
+    console.log('num', num);
   }
 
   console.log(count);
