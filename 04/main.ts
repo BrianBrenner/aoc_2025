@@ -18,12 +18,7 @@ function canMove(grid: string[][], i: number, j: number) {
     const [di, dj] = direction;
     const newI = i + di;
     const newJ = j + dj;
-    if (
-      newI < 0 ||
-      newI >= grid.length ||
-      newJ < 0 ||
-      newJ >= grid[0]!.length
-    ) {
+    if (newI < 0 || newI >= grid.length || newJ < 0 || newJ >= grid[0]!.length) {
       continue;
     }
     if (grid[newI]![newJ] === '@') {
